@@ -1,103 +1,184 @@
-/* --- MAIN PAGE STYLES --- */
+:root {
+    --bg-color: #0f0f13;
+    --card-bg: #1c1c1e;
+    --text-main: #ffffff;
+    --text-muted: #8e8e93;
+    --accent-blue: #0a84ff;
+    --accent-red: #ff453a;
+    --accent-green: #30d158;
+    --radius: 16px;
+}
 
-.content-wrapper {
-    /* Push content down so it's not hidden behind the fixed topbar */
-    padding-top: 120px; 
-    max-width: 900px;
-    margin: 0 auto;
-    padding-bottom: 50px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+input[type="number"] {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+
+input[type="number"]:focus {
+    border-color: var(--accent-blue);
+}
+
+.auto-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.input-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-col label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.btn-primary {
+    width: 100%;
+    background-color: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-primary:active {
+    opacity: 0.8;
+}
+
+.btn-primary.active {
+    background-color: var(--accent-red);
+}
+
+.tally-display {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    justify-content: center;
+    padding: 30px 10px;
+    min-height: 150px;
 }
 
-/* 2. Server Description */
-.server-description {
-    background-color: var(--near-black);
-    border: 1px solid rgba(0, 206, 180, 0.2);
-    border-radius: 15px;
-    padding: 30px;
+.actual-number {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.tally-marks {
+    font-family: monospace;
+    font-size: 1.5rem;
+    color: var(--accent-blue);
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    width: 90%;
+    word-break: break-word;
+    line-height: 1.5;
 }
 
-.server-description p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin: 0;
-    color: var(--turquoise);
-}
-
-/* 3. Discord Button */
-.discord-section {
+.controls {
     display: flex;
     justify-content: center;
+    gap: 25px;
+    margin-top: 10px;
 }
 
-.discord-btn {
+.control-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: 2.5rem;
     display: flex;
     align-items: center;
-    background-color: #5865F2; /* Official Discord Purple */
+    justify-content: center;
+    cursor: pointer;
     color: white;
-    text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 30px; /* Round Cornered */
-    gap: 15px;
-    transition: transform 0.2s, background-color 0.2s;
-    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s;
 }
 
-.discord-btn:hover {
-    background-color: #4752C4;
-    transform: translateY(-3px);
+.control-btn:active {
+    transform: scale(0.95);
 }
 
-.discord-btn i {
-    font-size: 35px;
+.control-btn.minus {
+    background-color: #3a3a3c;
 }
 
-.discord-text {
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 1.2;
-    text-align: left;
+.control-btn.plus {
+    background-color: var(--accent-green);
 }
 
-/* 4. Description List */
-.description-list {
-    background-color: var(--near-black);
-    border-radius: 15px;
-    padding: 30px 50px;
-    width: 80%;
-    border-left: 4px solid var(--turquoise);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+.increment-settings {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+    padding: 15px 20px;
+    border-radius: var(--radius);
 }
 
-.description-list ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.increment-settings label {
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
-.description-list li {
-    font-size: 18px;
-    margin-bottom: 15px;
-    padding-left: 30px;
-    position: relative;
-    color: var(--turquoise);
-}
-
-.description-list li:last-child {
-    margin-bottom: 0;
-}
-
-/* Custom Turquoise Bullet Points */
-.description-list li::before {
-    content: '★';
-    position: absolute;
-    left: 0;
-    color: var(--turquoise);
-    font-size: 20px;
+.increment-settings input {
+    width: 80px;
+    text-align: center;
 }
